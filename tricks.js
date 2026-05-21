@@ -15,6 +15,9 @@ const tricks = [
   { label: "varial heelflip", aliases: [], clips: [
     "videos/varialheel/ikelow.mp4",
   ]},
+  { label: "varial kickflip", aliases: [], clips: [
+    "videos/varialkickflip/michaelsommer_1735760068_3536127074718371038_5606397.mp4",
+  ]},
   { label: "backside 360", aliases: [], clips: [
     "videos/bs360/ikelow.mp4",
   ]},
@@ -36,4 +39,9 @@ const tricks = [
     "videos/hardflip/ike1.mp4",
     "videos/hardflip/ike_low_1564507008_2099557870300359729_367943641.mp4",
   ]},
+  { label: "halfcab heelflip", aliases: [], clips: [
+    "videos/halfcabheel/michaelsommer.mp4",
+    "videos/halfcabheel/michaelsommer_1735760068_3536127074718371038_5606397.mp4",
+  ]},
+
 ];
