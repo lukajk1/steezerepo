@@ -157,10 +157,19 @@
 
     #btn-play { border-color: #999; color: #000; }
 
-    #clip-name {
+    #skater-link {
       font-size: 0.75rem;
-      color: #000;
       text-align: center;
+    }
+
+    #skater-link a {
+      color: #000;
+      text-decoration: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #skater-link a:hover {
+      border-bottom-color: #000;
     }
 
     /* ── Footer ── */
@@ -197,6 +206,7 @@
     <button id="btn-speed">1x</button>
     <button id="btn-mute">mute</button>
   </div>
+  <div id="skater-link"></div>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -207,6 +217,7 @@
 </footer>
 
 <script src="tricks.js"></script>
+<script src="skaters.js"></script>
 <script>
   const FPS       = 30;
   const FRAME_DUR = 1 / FPS;
@@ -218,7 +229,9 @@
   const btnPrev  = document.getElementById("btn-prev");
   const btnNext  = document.getElementById("btn-next");
   const frameCtr = document.getElementById("frame-counter");
-  const tabsEl   = document.getElementById("tabs");
+  const tabsEl      = document.getElementById("tabs");
+  const skaterLinkEl = document.getElementById("skater-link");
+
   const titleEl  = document.getElementById("trick-title");
 
   // Read ?trick= param
@@ -249,6 +262,15 @@
     vid.pause();
     btnPlay.textContent = "play";
     scrubber.value = 0;
+
+    const filename = src.split("/").pop().toLowerCase();
+    const match = Object.entries(skaters).find(([key]) => filename.includes(key));
+    if (match) {
+      const [key, url] = match;
+      skaterLinkEl.innerHTML = `<a href="${url}" target="_blank">@${key}</a>`;
+    } else {
+      skaterLinkEl.innerHTML = "";
+    }
   }
 
   vid.addEventListener("timeupdate", syncUI);
