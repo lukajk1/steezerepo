@@ -20,7 +20,7 @@ import re
 import json
 
 VIDEOS_DIR = "videos"
-OUTPUT     = "tricks.js"
+OUTPUT     = "js/tricks.js"
 EXTS       = {".mp4", ".webm", ".mov"}
 
 

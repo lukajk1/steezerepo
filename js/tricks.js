@@ -3,11 +3,9 @@
 // Labels, aliases, and parents are preserved on re-run — edit them freely in this file.
 
 const tricks = [
-
   { label: "frontside pop shuvit", aliases: [], parent: null, clips: [
     "videos/fsshuv/aimu.mp4",
   ]},
-
   { label: "kickflip", aliases: ["kf"], parent: null, clips: [
     "videos/kickflip/aimu.mp4",
     "videos/kickflip/dylanjaeb.mp4",
@@ -17,14 +15,13 @@ const tricks = [
   ]},
   { label: "frontside kickflip", aliases: [], parent: "kickflip", clips: [
     "videos/fsflip/dylan.mp4",
-  ]},  
+  ]},
   { label: "varial kickflip", aliases: [], parent: "kickflip", clips: [
     "videos/varialkickflip/michaelsommer.mp4",
   ]},
-
   { label: "heelflip", aliases: [], parent: null, clips: [
-    "videos/heelflip/dylanjaeb.mp4",
     "videos/heelflip/michaelsommer.mp4",
+    "videos/heelflip/dylanjaeb.mp4",
   ]},
   { label: "backside heelflip", aliases: [], parent: "heelflip", clips: [
     "videos/bsheel/michaelsommer.mp4",
@@ -35,14 +32,14 @@ const tricks = [
   { label: "frontside heelflip", aliases: [], parent: "heelflip", clips: [
     "videos/fsheel/michaelsommer_2.mp4",
   ]},
-
   { label: "varial heelflip", aliases: [], parent: "heelflip", clips: [
     "videos/varialheel/ikelow.mp4",
   ]},
-
   { label: "backside 360", aliases: [], parent: null, clips: [
     "videos/bs360/aimu.mp4",
-    "videos/bs360/ikelow.mp4",
+  ]},
+  { label: "frontside 360", aliases: [], parent: null, clips: [
+    "videos/fs360/ikelow.mp4",
   ]},
   { label: "360 flip", aliases: [], parent: null, clips: [
     "videos/360flip/ike.mp4",
@@ -51,14 +48,13 @@ const tricks = [
     "videos/bigspin/ike.mp4",
     "videos/bigspin/ike_1.mp4",
   ]},
-  { label: "backside 360 kickflip", aliases: [], parent: "backside 360", clips: [
-    "videos/bs360flip/ike.mp4",
-    "videos/bs360flip/ike_1.mp4",
+  { label: "frontside 360 kickflip", aliases: [], parent: "frontside 360", clips: [
+    "videos/fs360flip/ike.mp4",
+    "videos/fs360flip/ike_1.mp4",
   ]},
   { label: "hardflip", aliases: [], parent: null, clips: [
     "videos/hardflip/dylanjaeb.mp4",
     "videos/hardflip/ike1.mp4",
     "videos/hardflip/michaelsommer_1.mp4",
   ]},
-
 ];

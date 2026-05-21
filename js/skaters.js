@@ -5,7 +5,7 @@
 const skaters = {
   "dylanjaeb":     "https://instagram.com/dylanjaeb",
   "michaelsommer": "https://instagram.com/michaelsommer",
-  "ikelow":        "https://instagram.com/ikelow",
-  "yuto":          "https://instagram.com/yutoshouldflip",
-  "aimu":          "https://instagram.com/aimu",
+  "ikelow":        "https://instagram.com/ike_low/",
+  "yuto":          "https://instagram.com/yutohorigome",
+  "aimu":          "https://instagram.com/aimu_yamazuki/",
 };
