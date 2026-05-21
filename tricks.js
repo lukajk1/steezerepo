@@ -3,8 +3,18 @@
 // Labels and aliases are preserved on re-run — edit them freely in this file.
 
 const tricks = [
+
+  { label: "frontside pop shuvit", aliases: [], clips: [
+    "videos/fsshuv/aimu.mp4",
+  ]},
+
   { label: "kickflip", aliases: ["kf"], clips: [
+    "videos/kickflip/aimu.mp4",
     "videos/kickflip/dylanjaeb.mp4",
+  ]},
+  { label: "heelflip", aliases: [], clips: [
+    "videos/heelflip/dylanjaeb.mp4",
+    "videos/heelflip/michaelsommer.mp4",
   ]},
   { label: "backside kickflip", aliases: [], clips: [
     "videos/bsflip/yuto.mp4",
@@ -12,13 +22,23 @@ const tricks = [
   { label: "frontside kickflip", aliases: [], clips: [
     "videos/fsflip/dylan.mp4",
   ]},
+  { label: "backside heelflip", aliases: [], clips: [
+    "videos/bsheel/michaelsommer.mp4",
+    "videos/bsheel/michaelsommer_1.mp4",
+    "videos/bsheel/michaelsommer_1667059367_2959828689447914794_5606397.mp4",
+    "videos/bsheel/michaelsommer_1735760068_3536127074718371038_5606397.mp4",
+  ]},
+  { label: "frontside heelflip", aliases: [], clips: [
+    "videos/fsheel/michaelsommer_2.mp4",
+  ]},
   { label: "varial heelflip", aliases: [], clips: [
     "videos/varialheel/ikelow.mp4",
   ]},
   { label: "varial kickflip", aliases: [], clips: [
-    "videos/varialkickflip/michaelsommer_1735760068_3536127074718371038_5606397.mp4",
+    "videos/varialkickflip/michaelsommer.mp4",
   ]},
   { label: "backside 360", aliases: [], clips: [
+    "videos/bs360/aimu.mp4",
     "videos/bs360/ikelow.mp4",
   ]},
   { label: "360 flip", aliases: [], clips: [
@@ -26,22 +46,16 @@ const tricks = [
   ]},
   { label: "bigspin", aliases: [], clips: [
     "videos/bigspin/ike.mp4",
-    "videos/bigspin/ike_low_1581448751_2241675236252624072_367943641.mp4",
+    "videos/bigspin/ike_1.mp4",
   ]},
   { label: "backside 360 kickflip", aliases: [], clips: [
     "videos/bs360flip/ike.mp4",
     "videos/bs360flip/ike_1.mp4",
-    "videos/bs360flip/ike_low_1564331976_2098090539694958304_367943641.mp4",
   ]},
   { label: "hardflip", aliases: [], clips: [
     "videos/hardflip/dylanjaeb.mp4",
-    "videos/hardflip/dylanjaeb_1766199066_3791472512748847953_1964527921.mp4",
     "videos/hardflip/ike1.mp4",
-    "videos/hardflip/ike_low_1564507008_2099557870300359729_367943641.mp4",
-  ]},
-  { label: "halfcab heelflip", aliases: [], clips: [
-    "videos/halfcabheel/michaelsommer.mp4",
-    "videos/halfcabheel/michaelsommer_1735760068_3536127074718371038_5606397.mp4",
+    "videos/hardflip/michaelsommer_1.mp4",
   ]},
 
 ];

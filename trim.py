@@ -118,6 +118,4 @@ if __name__ == "__main__":
             except Exception as e:
                 print(f"\nError: {e}")
 
-            again = input("\nPress Enter to trim another clip, or type q to quit: ").strip().lower()
-            if again == "q":
-                break
+            print()
