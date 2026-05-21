@@ -3,7 +3,7 @@
 // Labels and aliases are preserved on re-run — edit them freely in this file.
 
 const tricks = [
-  { label: "kickflip", aliases: [], clips: [
+  { label: "kickflip", aliases: ["kf"], clips: [
     "videos/kickflip/dylanjaeb.mp4",
   ]},
   { label: "backside kickflip", aliases: [], clips: [
@@ -17,5 +17,12 @@ const tricks = [
   ]},
   { label: "backside 360", aliases: [], clips: [
     "videos/bs360/ikelow.mp4",
+  ]},
+  { label: "360 flip", aliases: [], clips: [
+    "videos/360flip/ike.mp4",
+  ]},
+  { label: "bigspin", aliases: [], clips: [
+    "videos/bigspin/ike.mp4",
+    "videos/bigspin/ike_low_1581448751_2241675236252624072_367943641.mp4",
   ]},
 ];

@@ -1,11 +1,13 @@
 """
-Trim a video clip to a frame range and overwrite the file.
+Trim a video clip to a frame range.
+
+Output is saved alongside the source file, named after the first part of the
+filename (up to the first underscore), with a number appended if needed.
+
+  e.g. ike_low_123.mp4  ->  ike.mp4, or ike_1.mp4 if ike.mp4 exists
 
 Usage:
-  python trim.py <file> <start_frame> <end_frame>
-
-Example:
-  python trim.py videos/kickflip/chrischann.mp4 42 180
+  python trim.py <file> <start_frame> [end_frame]
 
 Requires ffmpeg and ffprobe on PATH.
 """
@@ -65,17 +67,28 @@ def main():
     else:
         print(f"Trimming first {start_frame} frames ({start_sec:.4f}s) from start")
 
-    tmp = path + ".tmp.mp4"
+    # Derive output name: everything before first underscore
+    directory = os.path.dirname(path)
+    basename  = os.path.basename(path)
+    stem      = basename.split("_")[0]
+    out_base  = os.path.join(directory, stem + ".mp4")
+
+    # Append a number if the file already exists
+    if os.path.exists(out_base):
+        n = 1
+        while True:
+            out_base = os.path.join(directory, f"{stem}_{n}.mp4")
+            if not os.path.exists(out_base):
+                break
+            n += 1
 
     cmd = ["ffmpeg", "-y", "-ss", str(start_sec)]
     if end_sec is not None:
         cmd += ["-to", str(end_sec)]
-    cmd += ["-i", path, "-c:v", "libx264", "-c:a", "aac", "-movflags", "+faststart", tmp]
+    cmd += ["-i", path, "-c:v", "libx264", "-c:a", "aac", "-movflags", "+faststart", out_base]
 
     subprocess.run(cmd, check=True)
-
-    os.replace(tmp, path)
-    print(f"Done: {path}")
+    print(f"Done: {out_base}")
 
 
 if __name__ == "__main__":
