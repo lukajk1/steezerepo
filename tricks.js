@@ -25,4 +25,15 @@ const tricks = [
     "videos/bigspin/ike.mp4",
     "videos/bigspin/ike_low_1581448751_2241675236252624072_367943641.mp4",
   ]},
+  { label: "backside 360 kickflip", aliases: [], clips: [
+    "videos/bs360flip/ike.mp4",
+    "videos/bs360flip/ike_1.mp4",
+    "videos/bs360flip/ike_low_1564331976_2098090539694958304_367943641.mp4",
+  ]},
+  { label: "hardflip", aliases: [], clips: [
+    "videos/hardflip/dylanjaeb.mp4",
+    "videos/hardflip/dylanjaeb_1766199066_3791472512748847953_1964527921.mp4",
+    "videos/hardflip/ike1.mp4",
+    "videos/hardflip/ike_low_1564507008_2099557870300359729_367943641.mp4",
+  ]},
 ];
