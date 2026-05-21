@@ -197,7 +197,6 @@
     <button id="btn-speed">1x</button>
     <button id="btn-mute">mute</button>
   </div>
-  <div id="clip-name"></div>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -219,7 +218,6 @@
   const btnPrev  = document.getElementById("btn-prev");
   const btnNext  = document.getElementById("btn-next");
   const frameCtr = document.getElementById("frame-counter");
-  const clipName = document.getElementById("clip-name");
   const tabsEl   = document.getElementById("tabs");
   const titleEl  = document.getElementById("trick-title");
 
@@ -251,7 +249,6 @@
     vid.pause();
     btnPlay.textContent = "play";
     scrubber.value = 0;
-    clipName.textContent = src.split("/").pop();
   }
 
   vid.addEventListener("timeupdate", syncUI);

@@ -69,6 +69,10 @@
       color: #000;
     }
 
+    .trick-list a.child {
+      padding-left: 24px;
+    }
+
     footer {
       font-size: 0.7rem;
       color: #000;
@@ -84,7 +88,7 @@
 
 <header>
   <img src="logo.png" alt="logo">
-  <h1>STEEZE.REPO</h1>
+  <h1>STEEZE_REPO</h1>
 </header>
 
 <input type="text" id="search" placeholder="search tricks..." autocomplete="off" spellcheck="false">
@@ -117,18 +121,41 @@
     return [trick.label, ...(trick.aliases || [])].some(t => fuzzy(q, t));
   }
 
-  const entries = tricks.map(trick => {
+  // Render parents first, with their children immediately after
+  const ordered = [];
+  const parents = tricks.filter(t => !t.parent);
+  parents.forEach(parent => {
+    ordered.push(parent);
+    tricks.filter(t => t.parent === parent.label).forEach(child => ordered.push(child));
+  });
+  // Any remaining (children whose parent isn't in the list)
+  tricks.forEach(t => { if (!ordered.includes(t)) ordered.push(t); });
+
+  const entries = ordered.map(trick => {
     const a = document.createElement("a");
-    a.textContent = trick.label;
+    a.textContent = `${trick.label} — ${trick.clips.length}`;
     a.href = `viewer.html?trick=${encodeURIComponent(trick.label)}`;
+    if (trick.parent) a.classList.add("child");
     listEl.appendChild(a);
     return { a, trick };
   });
 
   searchEl.addEventListener("input", () => {
     const q = searchEl.value.trim();
+
+    // First pass: determine which tricks match
+    const matched = new Set();
+    entries.forEach(({ trick }) => {
+      if (matchesTrick(trick, q)) matched.add(trick.label);
+    });
+
+    // If a child matches, also show its parent
+    entries.forEach(({ trick }) => {
+      if (trick.parent && matched.has(trick.label)) matched.add(trick.parent);
+    });
+
     entries.forEach(({ a, trick }) => {
-      a.style.display = matchesTrick(trick, q) ? "block" : "none";
+      a.style.display = matched.has(trick.label) ? "block" : "none";
     });
   });
 </script>
