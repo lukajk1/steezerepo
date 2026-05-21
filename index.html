@@ -3,17 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Skate Tricks</title>
+  <title>Steeze Repo</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: #fff;
-      color: #111;
+      color: #000;
       font-family: monospace;
       padding: 16px;
       display: flex;
@@ -21,206 +17,64 @@
       gap: 16px;
     }
 
-    /* ── Header ── */
     header {
       display: flex;
       align-items: flex-end;
       gap: 12px;
     }
 
-    header img {
-      height: 48px;
-      display: block;
-    }
+    header img { height: 48px; display: block; }
 
     h1 {
       font-size: 1rem;
       font-weight: normal;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #333;
+      color: #000;
     }
 
-    /* ── Search ── */
     #search {
       display: block;
       width: 100%;
       background: none;
       border: none;
       border-bottom: 1px solid #ddd;
-      color: #111;
+      color: #000;
       font-family: monospace;
       font-size: 0.9rem;
       padding: 6px 0;
       outline: none;
     }
 
-    #search::placeholder { color: #888; }
+    #search::placeholder { color: #000; }
     #search:focus { border-bottom-color: #999; }
 
-    /* ── Video ── */
-    .video-wrap {
-      background: #000;
-      position: relative;
-      width: 100%;
-      height: 80vw; /* square-ish on mobile, ~16:9 feel */
-      max-height: 80vh;
-    }
-
-    .video-wrap video {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: contain;
-    }
-
-    .frame-counter {
-      position: absolute;
-      top: 8px;
-      right: 10px;
-      font-size: 0.75rem;
-      color: #eee;
-      background: rgba(0,0,0,0.4);
-      padding: 2px 6px;
-    }
-
-    /* ── Controls ── */
-    .controls {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 4px;
-      background: #ddd;
-      outline: none;
-      cursor: pointer;
-      padding: 12px 0;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 28px;
-      height: 28px;
-      background: #111;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    input[type="range"]::-moz-range-thumb {
-      width: 28px;
-      height: 28px;
-      background: #111;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .btn-row button {
-      background: none;
-      border: 1px solid #ddd;
-      color: #444;
-      font-family: monospace;
-      font-size: 0.85rem;
-      padding: 8px 16px;
-      cursor: pointer;
-    }
-
-    .btn-row button:hover {
-      border-color: #999;
-      color: #111;
-    }
-
-    #btn-play {
-      border-color: #999;
-      color: #111;
-    }
-
-    .time-display {
-      margin-left: auto;
-      font-size: 0.75rem;
-      color: #aaa;
-    }
-
-    #clip-name {
-      font-size: 0.75rem;
-      color: #555;
-    }
-
-    /* ── Trick list ── */
-    .trick-list button {
+    .trick-list a {
       display: block;
       width: 100%;
-      background: none;
       border: 1px solid #ddd;
-      color: #444;
+      color: #000;
       font-family: monospace;
       font-size: 0.9rem;
       padding: 10px 12px;
-      text-align: left;
-      cursor: pointer;
+      text-decoration: none;
       margin-bottom: 4px;
     }
 
-    .trick-list button:hover {
+    .trick-list a:hover {
       border-color: #999;
-      color: #111;
+      color: #000;
     }
 
-    .trick-list button.active {
-      border-color: #111;
-      color: #111;
-    }
-
-    .clip-list {
-      margin-bottom: 8px;
-      padding-left: 12px;
-      border-left: 1px solid #ddd;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
-
-    .clip-list button {
-      font-size: 0.75rem;
-      color: #aaa;
-      border-color: #eee;
-      padding: 6px 10px;
-      width: auto;
-      margin-bottom: 0;
-    }
-
-    .clip-list button:hover {
-      color: #444;
-      border-color: #bbb;
-    }
-
-    .clip-list button.active {
-      color: #111;
-      border-color: #888;
-    }
-
-    /* ── Footer ── */
     footer {
       font-size: 0.7rem;
-      color: #555;
+      color: #000;
       border-top: 1px solid #eee;
       padding-top: 12px;
-      margin-top: 16px;
+      margin-top: 8px;
     }
 
-    footer a { color: #555; }
+    footer a { color: #000; }
   </style>
 </head>
 <body>
@@ -232,28 +86,7 @@
 
 <input type="text" id="search" placeholder="search tricks..." autocomplete="off" spellcheck="false">
 
-<div class="video-wrap" id="video-wrap">
-  <video id="vid" preload="metadata"></video>
-  <span class="frame-counter" id="frame-counter">f 0</span>
-</div>
-
-<div class="controls">
-  <input type="range" id="scrubber" min="0" max="1000" value="0" step="1">
-
-  <div class="btn-row">
-    <button id="btn-prev">&#9664; frame</button>
-    <button id="btn-play">play</button>
-    <button id="btn-next">frame &#9654;</button>
-    <button id="btn-speed">1x</button>
-    <button id="btn-mute">mute</button>
-    <span class="time-display" id="time-display">0.000 / 0.000</span>
-  </div>
-  <div id="clip-name"></div>
-</div>
-
-<nav class="trick-list" id="trick-list">
-  <!-- populated by JS -->
-</nav>
+<nav class="trick-list" id="trick-list"></nav>
 
 <footer>
   All footage belongs to its respective owners.
@@ -262,25 +95,9 @@
 
 <script src="tricks.js"></script>
 <script>
-  const FPS       = 30;
-  const FRAME_DUR = 1 / FPS;
-
-  const vid      = document.getElementById("vid");
-  vid.muted = true;
-  const scrubber = document.getElementById("scrubber");
-  const btnPlay  = document.getElementById("btn-play");
-  const btnPrev  = document.getElementById("btn-prev");
-  const btnNext  = document.getElementById("btn-next");
-  const timeDisp = document.getElementById("time-display");
-  const frameCtr = document.getElementById("frame-counter");
-  const listEl   = document.getElementById("trick-list");
-  const clipName = document.getElementById("clip-name");
+  const listEl  = document.getElementById("trick-list");
   const searchEl = document.getElementById("search");
 
-  let activeTrickBtn = null;
-  let activeClipBtn  = null;
-
-  // Fuzzy match: subsequence
   function fuzzy(q, s) {
     s = s.toLowerCase(); q = q.toLowerCase();
     let si = 0;
@@ -297,143 +114,19 @@
     return [trick.label, ...(trick.aliases || [])].some(t => fuzzy(q, t));
   }
 
-  const trickEntries = [];
-
-  tricks.forEach((trick, i) => {
-    const trickBtn = document.createElement("button");
-    trickBtn.textContent = trick.label;
-
-    const clipList = document.createElement("div");
-    clipList.className = "clip-list";
-    clipList.style.display = "none";
-
-    trick.clips.forEach(src => {
-      const clipBtn = document.createElement("button");
-      clipBtn.textContent = src.split("/").pop();
-      clipBtn.addEventListener("click", () => loadClip(src, clipBtn));
-      clipList.appendChild(clipBtn);
-    });
-
-    trickBtn.addEventListener("click", () => {
-      const isOpen = clipList.style.display !== "none";
-      clipList.style.display = isOpen ? "none" : "flex";
-      if (activeTrickBtn) activeTrickBtn.classList.remove("active");
-      activeTrickBtn = trickBtn;
-      trickBtn.classList.add("active");
-      if (!isOpen && trick.clips.length > 0) {
-        loadClip(trick.clips[0], clipList.querySelector("button"));
-      }
-    });
-
-    listEl.appendChild(trickBtn);
-    listEl.appendChild(clipList);
-    trickEntries.push({ trickBtn, clipList, trick });
-
-    if (i === 0) trickBtn.click();
+  const entries = tricks.map(trick => {
+    const a = document.createElement("a");
+    a.textContent = trick.label;
+    a.href = `viewer.html?trick=${encodeURIComponent(trick.label)}`;
+    listEl.appendChild(a);
+    return { a, trick };
   });
 
   searchEl.addEventListener("input", () => {
     const q = searchEl.value.trim();
-    trickEntries.forEach(({ trickBtn, clipList, trick }) => {
-      const match = matchesTrick(trick, q);
-      trickBtn.style.display = match ? "block" : "none";
-      if (!match) clipList.style.display = "none";
+    entries.forEach(({ a, trick }) => {
+      a.style.display = matchesTrick(trick, q) ? "block" : "none";
     });
-  });
-
-  function loadClip(src, btn) {
-    if (activeClipBtn) activeClipBtn.classList.remove("active");
-    activeClipBtn = btn;
-    btn.classList.add("active");
-    vid.src = src;
-    vid.load();
-    vid.pause();
-    btnPlay.textContent = "play";
-    scrubber.value = 0;
-    clipName.textContent = src.split("/").pop();
-  }
-
-  vid.addEventListener("timeupdate", syncUI);
-  vid.addEventListener("loadedmetadata", () => {
-    scrubber.min  = 0;
-    scrubber.max  = Math.round((vid.duration || 0) * FPS);
-    scrubber.step = 1;
-    syncUI();
-  });
-  vid.addEventListener("ended", () => {
-    if (btnPlay.textContent === "pause") {
-      vid.currentTime = 0;
-      vid.play();
-    } else {
-      btnPlay.textContent = "play";
-    }
-  });
-
-  function syncUI() {
-    const t     = vid.currentTime;
-    const frame = Math.round(t * FPS);
-    scrubber.value = frame;
-    timeDisp.textContent = `${t.toFixed(3)} / ${(vid.duration || 0).toFixed(3)}`;
-    frameCtr.textContent = `f ${frame}`;
-  }
-
-  scrubber.addEventListener("input", () => {
-    vid.currentTime = parseInt(scrubber.value) / FPS;
-  });
-
-  btnPlay.addEventListener("click", () => {
-    if (vid.paused) { vid.play();  btnPlay.textContent = "pause"; }
-    else            { vid.pause(); btnPlay.textContent = "play";  }
-  });
-
-  btnPrev.addEventListener("click", () => {
-    vid.pause(); btnPlay.textContent = "play";
-    vid.currentTime = Math.max(0, vid.currentTime - FRAME_DUR);
-  });
-
-  btnNext.addEventListener("click", () => {
-    vid.pause(); btnPlay.textContent = "play";
-    vid.currentTime = Math.min(vid.duration || 0, vid.currentTime + FRAME_DUR);
-  });
-
-  const btnSpeed = document.getElementById("btn-speed");
-  let slowMode = false;
-  btnSpeed.addEventListener("click", () => {
-    slowMode = !slowMode;
-    vid.playbackRate = slowMode ? 0.5 : 1;
-    btnSpeed.textContent = slowMode ? "0.5x" : "1x";
-    btnSpeed.style.borderColor = slowMode ? "#999" : "#ddd";
-    btnSpeed.style.color = slowMode ? "#111" : "#444";
-  });
-
-  const btnMute = document.getElementById("btn-mute");
-  function getMuteCookie() {
-    return document.cookie.split(";").some(c => c.trim() === "muted=1");
-  }
-  function setMuteCookie(muted) {
-    const exp = new Date();
-    exp.setFullYear(exp.getFullYear() + 1);
-    document.cookie = `muted=${muted ? 1 : 0}; expires=${exp.toUTCString()}; path=/`;
-  }
-  function applyMute(muted) {
-    vid.muted = muted;
-    btnMute.textContent = muted ? "unmute" : "mute";
-    btnMute.style.borderColor = muted ? "#999" : "#ddd";
-    btnMute.style.color = muted ? "#111" : "#444";
-  }
-  applyMute(getMuteCookie());
-  btnMute.addEventListener("click", () => {
-    applyMute(!vid.muted);
-    setMuteCookie(vid.muted);
-  });
-
-  document.getElementById("video-wrap").addEventListener("click", () => btnPlay.click());
-
-  document.addEventListener("keydown", e => {
-    if (e.target.tagName === "INPUT") return;
-    if (e.code === "Space")                    { e.preventDefault(); btnPlay.click(); }
-    if (e.code === "ArrowLeft"  || e.key === ",") { e.preventDefault(); btnPrev.click(); }
-    if (e.code === "ArrowRight" || e.key === ".") { e.preventDefault(); btnNext.click(); }
   });
 </script>
 

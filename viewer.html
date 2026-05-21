@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steeze Repo — Viewer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: monospace;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header a {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #000;
+      text-decoration: none;
+    }
+
+    header a:hover { color: #000; }
+
+    h1 {
+      font-size: 1rem;
+      font-weight: normal;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    /* ── Clip tabs ── */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tabs button {
+      background: none;
+      border: 1px solid #ddd;
+      color: #000;
+      font-family: monospace;
+      font-size: 0.75rem;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .tabs button:hover { border-color: #bbb; color: #000; }
+
+    .tabs button.active {
+      border-color: #000;
+      color: #000;
+    }
+
+    /* ── Video ── */
+    .video-wrap {
+      background: #000;
+      position: relative;
+      width: 100%;
+      height: 80vw;
+      max-height: 80vh;
+    }
+
+    .video-wrap video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .frame-counter {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 0.75rem;
+      color: #eee;
+      background: rgba(0,0,0,0.4);
+      padding: 2px 6px;
+    }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 70%;
+      display: block;
+      margin: 0 auto;
+      height: 4px;
+      background: #ddd;
+      outline: none;
+      cursor: pointer;
+      padding: 12px 0;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 28px;
+      height: 28px;
+      background: #000;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 28px;
+      height: 28px;
+      background: #000;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .btn-row button {
+      background: none;
+      border: 1px solid #ddd;
+      color: #000;
+      font-family: monospace;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    .btn-row button:hover { border-color: #999; color: #000; }
+
+    #btn-play { border-color: #999; color: #000; }
+
+    #clip-name {
+      font-size: 0.75rem;
+      color: #000;
+      text-align: center;
+    }
+
+    /* ── Footer ── */
+    footer {
+      font-size: 0.7rem;
+      color: #000;
+      border-top: 1px solid #eee;
+      padding-top: 12px;
+      margin-top: 8px;
+    }
+
+    footer a { color: #000; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">&#8592; back</a>
+  <h1 id="trick-title"></h1>
+</header>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="video-wrap" id="video-wrap">
+  <video id="vid" preload="metadata"></video>
+  <span class="frame-counter" id="frame-counter">f 0</span>
+</div>
+
+<div class="controls">
+  <input type="range" id="scrubber" min="0" max="1000" value="0" step="1">
+
+  <div class="btn-row">
+    <button id="btn-prev">&#9664; frame</button>
+    <button id="btn-play">play</button>
+    <button id="btn-next">frame &#9654;</button>
+    <button id="btn-speed">1x</button>
+    <button id="btn-mute">mute</button>
+  </div>
+  <div id="clip-name"></div>
+</div>
+
+<footer>
+  All footage belongs to its respective owners.
+  For takedown requests: <a href="mailto:placeholder@example.com">placeholder@example.com</a>
+</footer>
+
+<script src="tricks.js"></script>
+<script>
+  const FPS       = 30;
+  const FRAME_DUR = 1 / FPS;
+
+  const vid      = document.getElementById("vid");
+  vid.muted = true;
+  const scrubber = document.getElementById("scrubber");
+  const btnPlay  = document.getElementById("btn-play");
+  const btnPrev  = document.getElementById("btn-prev");
+  const btnNext  = document.getElementById("btn-next");
+  const frameCtr = document.getElementById("frame-counter");
+  const clipName = document.getElementById("clip-name");
+  const tabsEl   = document.getElementById("tabs");
+  const titleEl  = document.getElementById("trick-title");
+
+  // Read ?trick= param
+  const params    = new URLSearchParams(window.location.search);
+  const trickParam = params.get("trick") || "";
+  const trick = tricks.find(t => t.label === trickParam) || tricks[0];
+
+  titleEl.textContent = trick ? trick.label : "—";
+  document.title = `${trick ? trick.label : "viewer"} — Steeze Repo`;
+
+  let activeTab = null;
+
+  // Build tabs
+  (trick ? trick.clips : []).forEach((src, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = src.split("/").pop();
+    btn.addEventListener("click", () => loadClip(src, btn));
+    tabsEl.appendChild(btn);
+    if (i === 0) loadClip(src, btn);
+  });
+
+  function loadClip(src, btn) {
+    if (activeTab) activeTab.classList.remove("active");
+    activeTab = btn;
+    btn.classList.add("active");
+    vid.src = src;
+    vid.load();
+    vid.pause();
+    btnPlay.textContent = "play";
+    scrubber.value = 0;
+    clipName.textContent = src.split("/").pop();
+  }
+
+  vid.addEventListener("timeupdate", syncUI);
+  vid.addEventListener("loadedmetadata", () => {
+    scrubber.min  = 0;
+    scrubber.max  = Math.round((vid.duration || 0) * FPS);
+    scrubber.step = 1;
+    syncUI();
+  });
+  vid.addEventListener("ended", () => {
+    if (btnPlay.textContent === "pause") {
+      vid.currentTime = 0;
+      vid.play();
+    } else {
+      btnPlay.textContent = "play";
+    }
+  });
+
+  function syncUI() {
+    const frame = Math.round(vid.currentTime * FPS);
+    scrubber.value = frame;
+    frameCtr.textContent = `f ${frame}`;
+  }
+
+  scrubber.addEventListener("input", () => {
+    vid.currentTime = parseInt(scrubber.value) / FPS;
+  });
+
+  btnPlay.addEventListener("click", () => {
+    if (vid.paused) { vid.play();  btnPlay.textContent = "pause"; }
+    else            { vid.pause(); btnPlay.textContent = "play";  }
+  });
+
+  btnPrev.addEventListener("click", () => {
+    vid.pause(); btnPlay.textContent = "play";
+    vid.currentTime = Math.max(0, vid.currentTime - FRAME_DUR);
+  });
+
+  btnNext.addEventListener("click", () => {
+    vid.pause(); btnPlay.textContent = "play";
+    vid.currentTime = Math.min(vid.duration || 0, vid.currentTime + FRAME_DUR);
+  });
+
+  const btnSpeed = document.getElementById("btn-speed");
+  let slowMode = false;
+  btnSpeed.addEventListener("click", () => {
+    slowMode = !slowMode;
+    vid.playbackRate = slowMode ? 0.5 : 1;
+    btnSpeed.textContent = slowMode ? "0.5x" : "1x";
+    btnSpeed.style.borderColor = slowMode ? "#999" : "#ddd";
+    btnSpeed.style.color = slowMode ? "#000" : "#000";
+  });
+
+  const btnMute = document.getElementById("btn-mute");
+  function getMuteCookie() {
+    return document.cookie.split(";").some(c => c.trim() === "muted=1");
+  }
+  function setMuteCookie(muted) {
+    const exp = new Date();
+    exp.setFullYear(exp.getFullYear() + 1);
+    document.cookie = `muted=${muted ? 1 : 0}; expires=${exp.toUTCString()}; path=/`;
+  }
+  function applyMute(muted) {
+    vid.muted = muted;
+    btnMute.textContent = muted ? "unmute" : "mute";
+    btnMute.style.borderColor = muted ? "#999" : "#ddd";
+    btnMute.style.color = muted ? "#000" : "#000";
+  }
+  applyMute(getMuteCookie());
+  btnMute.addEventListener("click", () => {
+    applyMute(!vid.muted);
+    setMuteCookie(vid.muted);
+  });
+
+  document.getElementById("video-wrap").addEventListener("click", () => btnPlay.click());
+
+  document.addEventListener("keydown", e => {
+    if (e.target.tagName === "INPUT") return;
+    if (e.code === "Space")                       { e.preventDefault(); btnPlay.click(); }
+    if (e.code === "ArrowLeft"  || e.key === ",") { e.preventDefault(); btnPrev.click(); }
+    if (e.code === "ArrowRight" || e.key === ".") { e.preventDefault(); btnNext.click(); }
+  });
+</script>
+
+</body>
+</html>
