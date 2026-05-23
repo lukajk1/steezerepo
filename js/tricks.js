@@ -20,16 +20,17 @@ const tricks = [
     "videos/varialkickflip/michaelsommer.mp4",
   ]},
   { label: "heelflip", aliases: [], parent: null, clips: [
-    "videos/heelflip/michaelsommer.mp4",
+    "videos/heelflip/shane_heeflip.mp4",
     "videos/heelflip/dylanjaeb.mp4",
+    "videos/heelflip/michaelsommer.mp4",
   ]},
   { label: "backside heelflip", aliases: [], parent: "heelflip", clips: [
-    "videos/bsheel/michaelsommer.mp4",
     "videos/bsheel/michaelsommer_1.mp4",
     "videos/bsheel/michaelsommer_1667059367_2959828689447914794_5606397.mp4",
     "videos/bsheel/michaelsommer_1735760068_3536127074718371038_5606397.mp4",
   ]},
   { label: "frontside heelflip", aliases: [], parent: "heelflip", clips: [
+    "videos/fsheel/michaelsommer.mp4",
     "videos/fsheel/michaelsommer_2.mp4",
   ]},
   { label: "varial heelflip", aliases: [], parent: "heelflip", clips: [
