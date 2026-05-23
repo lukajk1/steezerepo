@@ -11,30 +11,33 @@ const tricks = [
     "videos/kickflip/dylanjaeb.mp4",
   ]},
   { label: "backside kickflip", aliases: [], parent: "kickflip", clips: [
+    "videos/bsflip/antwuandixon_bsflip.mp4",
     "videos/bsflip/yuto.mp4",
   ]},
   { label: "frontside kickflip", aliases: [], parent: "kickflip", clips: [
     "videos/fsflip/dylan.mp4",
+    "videos/fsflip/shane_fsflip.mp4",
   ]},
   { label: "varial kickflip", aliases: [], parent: "kickflip", clips: [
     "videos/varialkickflip/michaelsommer.mp4",
   ]},
   { label: "heelflip", aliases: [], parent: null, clips: [
-    "videos/heelflip/shane_heeflip.mp4",
     "videos/heelflip/dylanjaeb.mp4",
     "videos/heelflip/michaelsommer.mp4",
+    "videos/heelflip/shane_heeflip.mp4",
   ]},
   { label: "backside heelflip", aliases: [], parent: "heelflip", clips: [
     "videos/bsheel/michaelsommer_1.mp4",
-    "videos/bsheel/michaelsommer_1667059367_2959828689447914794_5606397.mp4",
-    "videos/bsheel/michaelsommer_1735760068_3536127074718371038_5606397.mp4",
   ]},
   { label: "frontside heelflip", aliases: [], parent: "heelflip", clips: [
+    "videos/fsheel/erickoston_fsheel.mp4",
     "videos/fsheel/michaelsommer.mp4",
     "videos/fsheel/michaelsommer_2.mp4",
+    "videos/fsheel/shane_fsheel.mp4",
   ]},
   { label: "varial heelflip", aliases: [], parent: "heelflip", clips: [
     "videos/varialheel/ikelow.mp4",
+    "videos/varialheel/shane_varialheel.mp4",
   ]},
   { label: "backside 360", aliases: [], parent: null, clips: [
     "videos/bs360/aimu.mp4",
@@ -51,11 +54,16 @@ const tricks = [
   ]},
   { label: "frontside 360 kickflip", aliases: [], parent: "frontside 360", clips: [
     "videos/fs360flip/ike.mp4",
-    "videos/fs360flip/ike_1.mp4",
   ]},
   { label: "hardflip", aliases: [], parent: null, clips: [
     "videos/hardflip/dylanjaeb.mp4",
     "videos/hardflip/ike1.mp4",
     "videos/hardflip/michaelsommer_1.mp4",
+  ]},
+  { label: "inward heelflip", aliases: [], parent: null, clips: [
+    "videos/inwardheel/shane_inwardheel.mp4",
+  ]},
+  { label: "lazer flip", aliases: [], parent: null, clips: [
+    "videos/lazer_flip/michaelsommer_lazerflip.mp4",
   ]},
 ];
